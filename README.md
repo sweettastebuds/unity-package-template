@@ -1,4 +1,4 @@
-# Unity Package Template
+# 📦 Unity Package Template
 
 A comprehensive PowerShell setup script to quickly create Unity packages with a standard structure, complete with assembly definitions, documentation templates, and Git configuration.
 
@@ -17,7 +17,7 @@ A comprehensive PowerShell setup script to quickly create Unity packages with a 
 - PowerShell 5.1 or later (Windows) or PowerShell Core 7+ (cross-platform)
 - No Unity installation required to run the setup script
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Option 1: Interactive Mode (Recommended)
 

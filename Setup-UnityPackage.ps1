@@ -237,6 +237,55 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 "@
         }
+        "Proprietary" {
+            return @"
+PROPRIETARY LICENSE
+
+Copyright (c) $Year $Author. All rights reserved.
+
+This software and associated documentation files (the "Software") are the 
+proprietary and confidential property of $Author.
+
+GRANT OF LICENSE:
+Subject to the terms and conditions of this license and payment of applicable 
+license fees, the licensee is granted a non-exclusive, non-transferable license 
+to use and modify the Software for their internal business purposes only.
+
+RESTRICTIONS:
+The licensee may NOT:
+1. Distribute, sublicense, sell, rent, lease, or otherwise transfer the Software 
+   or any portion thereof to any third party
+2. Make the Software available to any third party through any means, including 
+   but not limited to hosting, software-as-a-service, or any other distribution 
+   mechanism
+3. Remove or alter any proprietary notices, labels, or marks on the Software
+4. Reverse engineer, decompile, or disassemble the Software (except to the 
+   extent such restriction is prohibited by applicable law)
+
+The licensee MAY:
+1. Modify and extend the Software for their own internal use
+2. Create derivative works based on the Software for their own internal use
+3. Use the Software in their own projects and applications, provided such use 
+   does not constitute distribution or redistribution of the Software itself
+
+OWNERSHIP:
+$Author retains all right, title, and interest in and to the Software, 
+including all intellectual property rights therein.
+
+NO WARRANTY:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+$Author BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN 
+AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+TERMINATION:
+This license is effective until terminated. This license will terminate 
+automatically without notice if the licensee fails to comply with any provision 
+of this license.
+"@
+        }
         default {
             return ""
         }
@@ -302,11 +351,12 @@ Write-Host "  2. Apache License 2.0"
 Write-Host "  3. GNU GPL v3.0"
 Write-Host "  4. BSD 3-Clause License"
 Write-Host "  5. The Unlicense (public domain)"
+Write-Host "  6. Proprietary License (commercial use)"
 Write-Host ""
 
-$licenseChoice = Get-UserInput -Prompt "Enter license number (1-5)" -Default "1" -Validator {
+$licenseChoice = Get-UserInput -Prompt "Enter license number (1-6)" -Default "1" -Validator {
     param($value)
-    return $value -match '^[1-5]$'
+    return $value -match '^[1-6]$'
 }
 
 $licenseMap = @{
@@ -315,6 +365,7 @@ $licenseMap = @{
     "3" = "GPL-3.0"
     "4" = "BSD-3-Clause"
     "5" = "Unlicense"
+    "6" = "Proprietary"
 }
 
 $license = $licenseMap[$licenseChoice]

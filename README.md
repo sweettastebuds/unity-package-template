@@ -99,6 +99,7 @@ The script will prompt you for the following information:
 3. **GNU GPL v3.0** - Copyleft license
 4. **BSD 3-Clause License** - Permissive with attribution
 5. **The Unlicense** - Public domain dedication
+6. **Proprietary License** - Commercial license allowing extension but not redistribution
 
 ## After Setup
 

@@ -41,7 +41,7 @@ Download the script and run it from any location:
 
 ```powershell
 # Download the script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sweettastebuds/unity-package-template/main/Setup-UnityPackage.ps1" -OutFile "Setup-UnityPackage.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/yourusername/unity-package-template/main/Setup-UnityPackage.ps1" -OutFile "Setup-UnityPackage.ps1"
 
 # Run it
 .\Setup-UnityPackage.ps1
@@ -198,4 +198,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-For questions, issues, or feature requests, please open an issue on the [GitHub repository](https://github.com/sweettastebuds/unity-package-template/issues).
+For questions, issues, or feature requests, please open an issue on the [GitHub repository](https://github.com/yourusername/unity-package-template/issues).

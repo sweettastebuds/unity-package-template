@@ -151,6 +151,9 @@ limitations under the License.
         }
         "GPL-3.0" {
             return @"
+NOTE: This is an abbreviated GPL-3.0 license. For the complete license text, 
+visit: https://www.gnu.org/licenses/gpl-3.0.txt
+
 GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
 
@@ -168,6 +171,9 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+For the complete GNU General Public License v3.0, please visit:
+https://www.gnu.org/licenses/gpl-3.0.txt
 "@
         }
         "BSD-3-Clause" {
@@ -269,7 +275,7 @@ Write-Host ""
 
 $packageName = Get-UserInput -Prompt "Package name (e.g., com.company.packagename)" -Required $true -Validator {
     param($value)
-    return $value -match '^[a-z0-9\-]+(\.[a-z0-9\-]+)+$'
+    return $value -match '^[a-z0-9]+(\.[a-z0-9]+)+$'
 }
 
 $displayName = Get-UserInput -Prompt "Display name" -Required $true
@@ -363,7 +369,7 @@ Write-Host "Creating assembly definitions..." -ForegroundColor Yellow
 # Runtime assembly definition
 $runtimeAsmdef = @{
     name = "$packageName.Runtime"
-    rootNamespace = ""
+    rootNamespace = $packageName.Replace(".", "")
     references = @()
     includePlatforms = @()
     excludePlatforms = @()
@@ -381,7 +387,7 @@ New-FileWithContent -Path (Join-Path $TargetPath "Runtime/$packageName.Runtime.a
 # Editor assembly definition
 $editorAsmdef = @{
     name = "$packageName.Editor"
-    rootNamespace = ""
+    rootNamespace = $packageName.Replace(".", "")
     references = @("$packageName.Runtime")
     includePlatforms = @("Editor")
     excludePlatforms = @()
@@ -399,7 +405,7 @@ New-FileWithContent -Path (Join-Path $TargetPath "Editor/$packageName.Editor.asm
 # Tests Runtime assembly definition
 $testsRuntimeAsmdef = @{
     name = "$packageName.Tests.Runtime"
-    rootNamespace = ""
+    rootNamespace = $packageName.Replace(".", "") + "Tests"
     references = @(
         "$packageName.Runtime",
         "UnityEngine.TestRunner",
@@ -423,7 +429,7 @@ New-FileWithContent -Path (Join-Path $TargetPath "Tests/Runtime/$packageName.Tes
 # Tests Editor assembly definition
 $testsEditorAsmdef = @{
     name = "$packageName.Tests.Editor"
-    rootNamespace = ""
+    rootNamespace = $packageName.Replace(".", "") + "Tests"
     references = @(
         "$packageName.Runtime",
         "$packageName.Editor",
@@ -465,15 +471,15 @@ $description
 
 ### Via manifest.json
 
-Add the following line to your project's ``Packages/manifest.json`` file:
+Add the following line to your project's ```Packages/manifest.json``` file:
 
-``````json
+```json
 {
   "dependencies": {
     "$packageName": "https://github.com/yourusername/yourrepo.git"
   }
 }
-``````
+```
 
 ## Quick Start
 
@@ -481,12 +487,12 @@ For detailed instructions, see the [Quick Start Guide](Documentation~/QuickStart
 
 ### Basic Usage
 
-``````csharp
+```csharp
 // Add your usage examples here
 using $packageName;
 
 // Example code
-``````
+```
 
 ## Features
 
@@ -508,7 +514,7 @@ Sample scenes and examples are available in the Package Manager under the Sample
 
 ## Support
 
-For questions, issues, or feature requests, please open an issue on the [GitHub repository](https://github.com/yourusername/yourrepo).
+For questions, issues, or feature requests, please open an issue on the GitHub repository.
 
 ## License
 
@@ -531,7 +537,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [$version] - $currentYear-$(Get-Date -Format 'MM-dd')
+## [$version] - $currentYear-$(Get-Date -Format 'MM')-$(Get-Date -Format 'dd')
 
 ### Added
 - Initial release
@@ -583,7 +589,7 @@ After installing the package, you should see it listed in the Package Manager.
 
 ### Step 3: Basic Usage
 
-``````csharp
+```csharp
 // Add step-by-step code examples here
 using $packageName;
 
@@ -594,7 +600,7 @@ public class ExampleScript : MonoBehaviour
         // Your code here
     }
 }
-``````
+```
 
 ### Step 4: Test Your Setup
 
@@ -626,7 +632,7 @@ public class ExampleScript : MonoBehaviour
 
 If you encounter any issues, please:
 1. Check the [Changelog](../CHANGELOG.md) for recent updates
-2. Search existing [Issues](https://github.com/yourusername/yourrepo/issues)
+2. Search existing Issues on GitHub
 3. Create a new issue with detailed information
 "@
 New-FileWithContent -Path (Join-Path $TargetPath "Documentation~/QuickStart.md") -Content $quickStartContent
@@ -665,7 +671,6 @@ $gitignoreContent = @"
 *.unityproj
 *.sln
 *.suo
-*.tmp
 *.user
 *.userprefs
 *.pidb
